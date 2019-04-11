@@ -3,10 +3,13 @@
 
 #include "pch.h"
 #include <iostream>
+#include "Plane.h"
+#include "PassengerPlane.h"
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	PassengerPlane* plane1 = new PassengerPlane();
+	std::cout << plane1;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -1,5 +1,15 @@
-#include "Plane.h"
+#include "pch.h"
 #include "Company.h"
+#include <algorithm>
+
+Company::Company()
+{
+}
+
+
+Company::~Company()
+{
+}
 
 void Company::addPlane(Plane* plane) {
 	planes.push_back(plane);
@@ -22,13 +32,13 @@ int Company::getTotalCarryingWeight()
 	return 0;
 }
 
-vector<Plane*> Company::sortPlanesByFlyingDistance() {
-
-	std::sort(planes.begin(), planes.end(), comparePlanes);
-}
-
 bool comparePlanes(Plane *a, Plane *b) {
 	return (a->fuelConsumption - b->fuelConsumption);
+}
+
+vector<Plane*> Company::sortPlanesByFlyingDistance() {
+	std::sort(planes.begin(), planes.end(), comparePlanes);
+	return planes;
 }
 
 vector<Plane*> Company::findPlanesByFuelConsumption(int startValue, int endValue) {
@@ -41,9 +51,3 @@ vector<Plane*> Company::findPlanesByFuelConsumption(int startValue, int endValue
 	return founded;
 }
 
-int compare(const void * x1, const void * x2)
-{
-	auto p1 = (Plane*)x1;
-	auto p2 = (Plane*)x2;
-	return (int)(p1->getFlyDistance - p2->getFlyDistance());
-}

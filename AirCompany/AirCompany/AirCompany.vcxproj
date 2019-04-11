@@ -151,8 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Company.h" />
     <ClInclude Include="CargoPlane.h" />
+    <ClInclude Include="Company.h" />
     <ClInclude Include="PassengerPlane.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Plane.h" />
