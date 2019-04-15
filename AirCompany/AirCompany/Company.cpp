@@ -31,9 +31,15 @@ int Company::getTotalCapacity() {
 
 int Company::getTotalCarryingWeight()
 {
-	return 0;
+	int totalWeight = 0;
+	for (unsigned i = 0; i < planes.size(); i++) {
+		Plane* p = planes.at(i);
+		totalWeight += p->getCarryingWeight();
+	}
+	return totalWeight;
 }
 
+// TODO: incorrect comparator
 bool comparePlanes(Plane *a, Plane *b) {
 	return (a->fuelConsumption - b->fuelConsumption);
 }
