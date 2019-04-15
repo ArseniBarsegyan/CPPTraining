@@ -24,7 +24,7 @@ int main()
 
 	//Show all planes sorted by fly distance
 	std::cout<< "--------------------\n";
-	std::cout << "Sorted planes";
+	std::cout << "Sorted planes: \n";
 
 	vector<Plane*> sortedPlanes = airCompany->sortPlanesByFlyingDistance();
 	for (unsigned i = 0; i < sortedPlanes.size(); i++) {
@@ -39,9 +39,10 @@ int main()
 	//Show total capacity of the company and total carrying weight
 	std::cout << "Info about company\n";
 
-	std::cout << airCompany->name + " total capacity: " + std::to_string(airCompany->getTotalCapacity())
+	std::cout << airCompany->name + " total capacity: " 
+		+ std::to_string(airCompany->getTotalCapacity())
 		+ ", total carrying weight: " 
-		+ std::to_string(airCompany->getTotalCarryingWeight());
+		+ std::to_string(airCompany->getTotalCarryingWeight()) + "\n";
 	std::cout << "--------------------\n";
 	
 	//Find all planes with fuel consumption between 0 and 1000 l/h

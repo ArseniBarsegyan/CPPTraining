@@ -41,7 +41,7 @@ int Company::getTotalCarryingWeight()
 
 // TODO: incorrect comparator
 bool comparePlanes(Plane *a, Plane *b) {
-	return (a->fuelConsumption - b->fuelConsumption);
+	return (a->getFlyDistance() < b->getFlyDistance());
 }
 
 vector<Plane*> Company::sortPlanesByFlyingDistance() {
