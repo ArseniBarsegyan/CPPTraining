@@ -2,8 +2,10 @@
 #include "Company.h"
 #include <algorithm>
 
-Company::Company()
+Company::Company(string name, std::vector<Plane*> planes)
 {
+	this->name = name;
+	this->planes = planes;
 }
 
 

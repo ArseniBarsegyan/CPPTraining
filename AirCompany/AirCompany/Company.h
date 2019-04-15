@@ -10,7 +10,7 @@ class Company
 private:
 	vector<Plane*> planes;
 public:
-	Company();
+	Company(string name, std::vector<Plane*> planes);
 	~Company();
 	string name;
 	void addPlane(Plane* plane);
