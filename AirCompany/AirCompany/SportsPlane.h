@@ -4,6 +4,6 @@
 class SportsPlane : public Plane
 {
 public:
-	int carryingCapacity;
+	int crewNumber;
 	virtual std::string airDrop() = 0;
 };

@@ -1,7 +1,8 @@
 #pragma once
-class PassengerPlane
+#include "Plane.h"
+class PassengerPlane :
+	public Plane
 {
 public:
 	int passengersNumber;
 };
-

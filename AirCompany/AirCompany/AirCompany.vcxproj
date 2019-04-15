@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Airbus.h" />
+    <ClInclude Include="ANSportsPlane.h" />
+    <ClInclude Include="Boeing.h" />
     <ClInclude Include="CargoPlane.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="PassengerPlane.h" />

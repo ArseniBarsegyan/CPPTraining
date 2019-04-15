@@ -21,9 +21,6 @@
     <ClInclude Include="CargoPlane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PassengerPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -31,6 +28,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Company.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PassengerPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ANSportsPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Airbus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Boeing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
