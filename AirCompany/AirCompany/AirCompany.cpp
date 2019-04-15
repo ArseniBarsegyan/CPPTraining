@@ -15,7 +15,7 @@ int main()
 	planes.push_back(new ANSportsPlane("AN01", 300, 300, 600, 2));
 
 	//Get info about every plane in list
-	for (unsigned i = 0; i < planes.size(); i++) {
+	for (int i = 0; i < planes.size(); i++) {
 		std::cout << planes.at(i)->getInfo()+"\n";
 	}
 
@@ -27,11 +27,11 @@ int main()
 	std::cout << "Sorted planes: \n";
 
 	vector<Plane*> sortedPlanes = airCompany->sortPlanesByFlyingDistance();
-	for (unsigned i = 0; i < sortedPlanes.size(); i++) {
+	for (int i = 0; i < sortedPlanes.size(); i++) {
 		std::cout << "Plane: " 
-			+ planes.at(i)->name 
+			+ sortedPlanes.at(i)->name
 			+ ", distance: " 
-			+ std::to_string(planes.at(i)->getFlyDistance())<<"\n";
+			+ std::to_string(sortedPlanes.at(i)->getFlyDistance())<<"\n";
 	}
 
 	std::cout << "--------------------\n";
@@ -49,7 +49,7 @@ int main()
 	std::cout << "Founded planes by fuel consumption between 0 and 1000:\n";
 	vector<Plane*> planes2 = airCompany->findPlanesByFuelConsumption(0, 1000);
 
-	for (unsigned i = 0; i < planes2.size(); i++) {
+	for (int i = 0; i < planes2.size(); i++) {
 		std::cout << planes2.at(i)->getInfo() + "\n";
 	}
 }

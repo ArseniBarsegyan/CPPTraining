@@ -8,7 +8,6 @@ Company::Company(string name, std::vector<Plane*> planes)
 	this->planes = planes;
 }
 
-
 Company::~Company()
 {
 }
@@ -41,7 +40,9 @@ int Company::getTotalCarryingWeight()
 
 // TODO: incorrect comparator
 bool comparePlanes(Plane *a, Plane *b) {
-	return (a->getFlyDistance() < b->getFlyDistance());
+	float flyDistance1 = (*a).getFlyDistance();
+	float flyDistance2 = (*b).getFlyDistance();
+	return (flyDistance1 > flyDistance2);
 }
 
 vector<Plane*> Company::sortPlanesByFlyingDistance() {
