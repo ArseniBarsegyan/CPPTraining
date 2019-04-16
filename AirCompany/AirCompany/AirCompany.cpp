@@ -5,9 +5,13 @@
 #include "Company.h"
 #include "Airbus.h";
 #include "Boeing.h";
+#include <time.h>
 
 int main()
 {
+	clock_t t1, t2;
+	t1 = clock();	
+
 	//Creating collection of planes
 	vector<Plane*> planes;
 	planes.push_back(new Airbus("Airbus01", 900, 6000, 130000, 12000));
@@ -52,4 +56,11 @@ int main()
 	for (int i = 0; i < planes2.size(); i++) {
 		std::cout << planes2.at(i)->getInfo() + "\n";
 	}
+
+	//code goes here
+	t2 = clock();
+
+	float diff = ((float)t2 - (float)t1) / CLOCKS_PER_SEC;
+	std::cout << "Running time: " << diff;
+	return 0;
 }
