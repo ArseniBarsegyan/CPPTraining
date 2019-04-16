@@ -38,11 +38,8 @@ int Company::getTotalCarryingWeight()
 	return totalWeight;
 }
 
-// TODO: incorrect comparator
 bool comparePlanes(Plane *a, Plane *b) {
-	float flyDistance1 = (*a).getFlyDistance();
-	float flyDistance2 = (*b).getFlyDistance();
-	return (flyDistance1 > flyDistance2);
+	return (a->getFlyDistance() > b->getFlyDistance());
 }
 
 vector<Plane*> Company::sortPlanesByFlyingDistance() {
