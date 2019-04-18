@@ -1,11 +1,15 @@
 #include "stdafx.h"
 #include "Concordance.h"
 #include <iostream>
-#include <map>
 #include <fstream>
+#include <map>
+#include <string>
+#include <vector>
 #include <algorithm>
 using std::ofstream;
 using std::map;
+using std::vector;
+using std::string;
 
 Concordance::Concordance(vector<Word> words)
 {
@@ -39,14 +43,16 @@ vector<string> Concordance::GroupByAlphaBet()
 		for (auto j = 0; j < words.size(); j++) {
 			auto word = words.at(j);
 
+			int repeatCount = word.GetRepeatCount();
 			string wordInfo = word.GetValue() + 
 				" " 
-				+ std::to_string(word.GetRepeatCount())
+				+ std::to_string(repeatCount)
 				+ ": ";
 
 			for (int k = 0; k < word.GetPageNumbers().size(); k++) {
 				wordInfo.append(" ");
-				wordInfo.append(std::to_string(word.GetPageNumbers()[k]));
+				int pageNumber = word.GetPageNumbers().at(k);
+				wordInfo.append(std::to_string(pageNumber));
 			}
 			resultList.push_back(wordInfo);
 		}
@@ -56,13 +62,14 @@ vector<string> Concordance::GroupByAlphaBet()
 	return resultList;
 }
 
-map<string, vector<Word>> CreateGroups(vector<Word> words) {
+map<string, vector<Word>> Concordance::CreateGroups(vector<Word> words)
+{
 	map<string, vector<Word>> groups;
 
 	for (int i = 0; i < words.size(); i++) {
 		auto wordBeginningLetter = words[i].GetValue().substr(0, 1);
 		auto group = groups.find(wordBeginningLetter);
-		
+
 		if (group != groups.end()) {
 			// put word in group's words.
 			groups[wordBeginningLetter].push_back(words[i]);
@@ -73,13 +80,15 @@ map<string, vector<Word>> CreateGroups(vector<Word> words) {
 			groups[wordBeginningLetter].push_back(words[i]);
 		}
 	}
+	return groups;
 }
+
 
 void Concordance::WriteFile(string path)
 {
 	vector<string> concordance = GroupByAlphaBet();
 	ofstream out(path);
-	if (out.is_open) {
+	if (out.is_open()) {
 		for (int i = 0; i < concordance.size(); i++) {
 			out << concordance[i] << std::endl;
 		}

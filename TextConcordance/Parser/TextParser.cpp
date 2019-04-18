@@ -43,7 +43,7 @@ void TextParser::FillInWordsList()
 bool TextParser::IsWordsContainsWord(Word word)
 {
 	for (int i = 0; i < this->words.size(); i++) {
-		if (!this->words[i].GetValue().compare(word.GetValue)) {
+		if (!this->words[i].GetValue().compare(word.GetValue())) {
 			continue;
 		}
 		words[i].IncreaseRepeatCount();
@@ -65,9 +65,9 @@ bool TextParser::IsWordsContainsWord(Word word)
 string TextParser::JoinLines(Page page)
 {
 	string result;
-	auto lines = page.GetLines();
-	for (auto i = 0; i < lines.size(); i++) {
-		std::transform(lines.begin(), lines.end(), lines.begin(), ::tolower);
+	vector<string> lines = page.GetLines();
+	for (int i = 0; i < lines.size(); i++) {
+		std::transform(lines.at(i).begin(), lines.at(i).end(), lines.at(i).begin(), ::tolower);
 		result.append(lines.at(i));
 	}
 	return result;
