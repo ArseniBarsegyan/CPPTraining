@@ -42,11 +42,13 @@ void DocumentCreator::ReadFileContent()
 
 	if (in.is_open()) {
 		while (getline(in, line)) {
+			// When all lines of page are filled adding filled page to list of pages
+			// Creating new page and start filling it again. Counting of lines starting again
 			if (countLines > this->numberOfLinesPerPage) {
 				this->pages.push_back(this->page);
 				pageNumber++;
 				this->page = Page(pageNumber, this->numberOfLinesPerPage, vector<string>());
-				countLines++;
+				countLines = 1;
 			}
 			this->page.AddLine(line);
 			countLines++;

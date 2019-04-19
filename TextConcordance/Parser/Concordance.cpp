@@ -28,7 +28,6 @@ vector<string> Concordance::GroupByAlphaBet()
 {
 	vector<string> resultList;
 	vector<Word> orderedWords = this->words;
-	std::sort(orderedWords.begin(), orderedWords.end(), compareWords);
 
 	map<string, vector<Word>> wordsGroup = CreateGroups(orderedWords);
 

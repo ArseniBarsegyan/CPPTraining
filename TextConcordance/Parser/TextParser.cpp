@@ -2,6 +2,8 @@
 #include "TextParser.h"
 #include <algorithm>
 #include <regex>
+#include <string>
+#include <iostream>
 
 TextParser::TextParser(Document document)
 {
@@ -20,7 +22,7 @@ Concordance TextParser::CreateConcordance()
 
 void TextParser::FillInWordsList()
 {
-	std::regex reg("[A-Za-z]+");
+	std::regex reg("\\w+");
 	this->words = vector<Word>();
 
 	for (int i = 0; i < this->pages.size(); i++) {
@@ -28,13 +30,16 @@ void TextParser::FillInWordsList()
 		string pageText = JoinLines(pages.at(i));
 
 		std::smatch match;
-		if (std::regex_search(pageText, match, reg)) {
-			for (int j = 0; j < match.size(); j++) {
-				vector<int> pageNumbers;
-				Word word = Word(match.str(j), 1, this->pages[i].GetCurrentPageNumber(), vector<int>());
-				if (!IsWordsContainsWord(word)) {
-					this->words.push_back(word);
-				}
+
+		std::regex_iterator<string::iterator> it(pageText.begin(), pageText.end(), reg);
+		std::regex_iterator<string::iterator> end;
+
+		for (; it != end; ++it)
+		{
+			vector<int> pageNumbers;
+			Word word = Word(it->str(), 1, this->pages[i].GetCurrentPageNumber(), vector<int>());
+			if (!IsWordsContainsWord(word)) {
+				this->words.push_back(word);
 			}
 		}
 	}
@@ -42,22 +47,23 @@ void TextParser::FillInWordsList()
 
 bool TextParser::IsWordsContainsWord(Word word)
 {
-	for (int i = 0; i < this->words.size(); i++) {
-		if (!this->words[i].GetValue().compare(word.GetValue())) {
-			continue;
-		}
-		words[i].IncreaseRepeatCount();
+	// & point to element without copying it into memory
+	for (auto &w : words) {
+		if (w.GetValue().compare(word.GetValue()) == 0) {
+			w.IncreaseRepeatCount();
 
-		//Check if 'words[i]' already contains page number
-		for (int j = 0; j < words[i].GetPageNumbers().size(); j++) {
-			auto iter = std::find(words[i].GetPageNumbers().begin(), 
-				words[i].GetPageNumbers().end(), words[i].GetPageNumbers()[j]);
+			vector<int> wordPageNumbers = w.GetPageNumbers();
+			//Check if 'words[i]' already contains page number
+			for (int j = 0; j < wordPageNumbers.size(); j++) {
+				auto iter = std::find(wordPageNumbers.begin(),
+					wordPageNumbers.end(), wordPageNumbers.at(j));
 
-			if (iter == words[i].GetPageNumbers().end()) {
-				words[i].GetPageNumbers().push_back(words[i].GetPageNumbers()[j]);
+				if (iter == wordPageNumbers.end()) {
+					wordPageNumbers.push_back(wordPageNumbers.at(j));
+				}
 			}
-		}
-		return true;
+			return true;
+		}		
 	}
 	return false;
 }
@@ -69,6 +75,8 @@ string TextParser::JoinLines(Page page)
 	for (int i = 0; i < lines.size(); i++) {
 		std::transform(lines.at(i).begin(), lines.at(i).end(), lines.at(i).begin(), ::tolower);
 		result.append(lines.at(i));
+		// Join lines and add a space between them
+		result.append(" ");
 	}
 	return result;
 }
