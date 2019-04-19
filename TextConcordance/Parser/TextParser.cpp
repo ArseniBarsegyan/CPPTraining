@@ -54,12 +54,12 @@ bool TextParser::IsWordsContainsWord(Word word)
 
 			vector<int> wordPageNumbers = w.GetPageNumbers();
 			//Check if 'words[i]' already contains page number
-			for (int j = 0; j < wordPageNumbers.size(); j++) {
-				auto iter = std::find(wordPageNumbers.begin(),
-					wordPageNumbers.end(), wordPageNumbers.at(j));
+
+			for (int &wordPageNumber : wordPageNumbers) {
+				auto iter = std::find(wordPageNumbers.begin(), wordPageNumbers.end(), wordPageNumber);
 
 				if (iter == wordPageNumbers.end()) {
-					wordPageNumbers.push_back(wordPageNumbers.at(j));
+					wordPageNumbers.push_back(wordPageNumber);
 				}
 			}
 			return true;
@@ -72,9 +72,9 @@ string TextParser::JoinLines(Page page)
 {
 	string result;
 	vector<string> lines = page.GetLines();
-	for (int i = 0; i < lines.size(); i++) {
-		std::transform(lines.at(i).begin(), lines.at(i).end(), lines.at(i).begin(), ::tolower);
-		result.append(lines.at(i));
+	for (string &line : lines) {
+		std::transform(line.begin(), line.end(), line.begin(), ::tolower);
+		result.append(line);
 		// Join lines and add a space between them
 		result.append(" ");
 	}
