@@ -15,21 +15,21 @@ public:
 	~TextParser();
 
 	//Creating concordance of the document
-	Concordance CreateConcordance();
+	Concordance create_concordance();
 private:
-	vector<Page> pages;
-	vector<Word> words;
+	vector<Page> pages_;
+	vector<Word> words_;
 	
 	//Filling words list
-	void FillInWordsList();
+	void fill_in_words_list();
 
 	//Join all lines on page with 'space' symbol
 	//in one string. Ignores case of letters
-	string JoinLines(Page page);
+	string join_lines(Page page);
 
 	//Check if list of words already contains word. If true
 	//increases word.RepeatCount. Also check if word already
 	//contain current page number
-	bool IsWordsContainsWord(Word word);	
+	bool is_words_contains_word(Word word);	
 };
 

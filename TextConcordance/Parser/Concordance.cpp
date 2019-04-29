@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Concordance.h"
-#include <iostream>
 #include <fstream>
 #include <map>
 #include <string>
@@ -13,62 +12,60 @@ using std::string;
 
 Concordance::Concordance(vector<Word> words)
 {
-	this->words = words;
+	this->words_ = words;
 }
 
 Concordance::~Concordance()
 {
 }
 
-vector<string> Concordance::GroupByAlphaBet()
+vector<string> Concordance::group_by_alpha_bet()
 {
-	vector<string> resultList;
-	vector<Word> orderedWords = this->words;
+	vector<string> result_list;
+	map<string, vector<Word>> words_group = create_groups(this->words_);
 
-	map<string, vector<Word>> wordsGroup = CreateGroups(orderedWords);
-
-	for (auto i = wordsGroup.begin(); i != wordsGroup.end(); i++) {
+	for (auto i = words_group.begin(); i != words_group.end(); i++) {
 		// transform group key to uppercase and add to result list
-		string groupKey = i->first;
-		std::transform(groupKey.begin(), groupKey.end(), groupKey.begin(), ::toupper);
-		resultList.push_back(groupKey);
+		string group_key = i->first;
+		std::transform(group_key.begin(), group_key.end(), group_key.begin(), ::toupper);
+		result_list.push_back(group_key);
 
 		// get all words associated with key
 		auto words = i->second;
 		for (Word &word : words) {
-			int repeatCount = word.GetRepeatCount();
-			string wordInfo = word.GetValue() +
+			int repeat_count = word.get_repeat_count();
+			string word_info = word.get_value() +
 				" "
-				+ std::to_string(repeatCount)
+				+ std::to_string(repeat_count)
 				+ ": ";
 
-			for (int pageNumber : word.GetPageNumbers()) {
-				wordInfo.append(" ");
-				wordInfo.append(std::to_string(pageNumber));
+			for (auto page_number : word.get_page_numbers()) {
+				word_info.append(" ");
+				word_info.append(std::to_string(page_number));
 			}
-			resultList.push_back(wordInfo);
+			result_list.push_back(word_info);
 		}
 		auto value = i->second;
 	}
-	return resultList;
+	return result_list;
 }
 
-map<string, vector<Word>> Concordance::CreateGroups(vector<Word> words)
+map<string, vector<Word>> Concordance::create_groups(vector<Word> words)
 {
 	map<string, vector<Word>> groups;
 
 	for (Word &word : words) {
-		string wordBeginningLetter = word.GetValue().substr(0, 1);
-		auto group = groups.find(wordBeginningLetter);
+		auto word_beginning_letter = word.get_value().substr(0, 1);
+		auto group = groups.find(word_beginning_letter);
 
 		if (group != groups.end()) {
 			// put word in group's words.
-			groups[wordBeginningLetter].push_back(word);
+			groups[word_beginning_letter].push_back(word);
 		}
 		else {
 			// create new group, add words collection and insert word to this collection.
-			groups.insert(std::make_pair(wordBeginningLetter, vector<Word>()));
-			groups[wordBeginningLetter].push_back(word);
+			groups.insert(std::make_pair(word_beginning_letter, vector<Word>()));
+			groups[word_beginning_letter].push_back(word);
 		}
 	}
 	return groups;
@@ -77,7 +74,7 @@ map<string, vector<Word>> Concordance::CreateGroups(vector<Word> words)
 
 void Concordance::WriteFile(string path)
 {
-	vector<string> concordance = GroupByAlphaBet();
+	vector<string> concordance = group_by_alpha_bet();
 	ofstream out(path);
 	if (out.is_open()) {
 		for (auto &line : concordance) {

@@ -1,10 +1,9 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <fstream>
 #include "Page.h"
 #include "Document.h"
-#include <sys/stat.h>
+
 using std::vector;
 using std::string;
 
@@ -12,18 +11,18 @@ using std::string;
 class DocumentCreator
 {
 public:
-	DocumentCreator(string fileName, int numberOfLinesPerPage);
+	DocumentCreator(string file_name, int number_of_lines_per_page);
 	~DocumentCreator();
 
-	Document CreateDocumentModel();
+	Document create_document_model();
 private:
-	vector<Page> pages;
-	Page page;
-	string fileName;
-	int numberOfLinesPerPage;
+	vector<Page> pages_;
+	Page page_;
+	string file_name_;
+	int number_of_lines_per_page_;
 
 	// Check if file exists
-	inline bool IsFileExists(const std::string& name);
-	void ReadFileContent();
+	inline bool is_file_exists(const std::string& name);
+	void read_file_content();
 };
 

@@ -7,33 +7,33 @@ using std::string;
 
 Page::Page() {}
 
-Page::Page(int currentPageNumber, int numberOfLines, vector<string> lines)
+Page::Page(int current_page_number, int number_of_lines, vector<string> lines)
 {
-	this->currentPageNumber = currentPageNumber;
-	this->numberOfLines = numberOfLines;
-	this->lines = lines;
+	this->current_page_number_ = current_page_number;
+	this->number_of_lines_ = number_of_lines;
+	this->lines_ = lines;
 }
 
 Page::~Page()
 {
 }
 
-void Page::AddLine(string line)
+void Page::add_line(string line)
 {
-	this->lines.push_back(line);
+	this->lines_.push_back(line);
 }
 
-int Page::GetCurrentPageNumber()
+int Page::get_current_page_number()
 {
-	return this->currentPageNumber;
+	return this->current_page_number_;
 }
 
-int Page::GetNumberOfLines()
+int Page::get_number_of_lines()
 {
-	return this->numberOfLines;
+	return this->number_of_lines_;
 }
 
-vector<string> Page::GetLines()
+vector<string> Page::get_lines()
 {
-	return this->lines;
+	return this->lines_;
 }

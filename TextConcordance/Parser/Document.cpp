@@ -9,20 +9,20 @@ using std::string;
 
 Document::Document(string name, vector<Page> pages)
 {
-	this->name = name;
-	this->pages = pages;
+	this->name_ = name;
+	this->pages_ = pages;
 }
 
 Document::~Document()
 {
 }
 
-string Document::GetName()
+string Document::get_name()
 {
-	return this->name;
+	return this->name_;
 }
 
-vector<Page> Document::GetPages()
+vector<Page> Document::get_pages()
 {
-	return this->pages;
+	return this->pages_;
 }

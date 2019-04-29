@@ -3,63 +3,62 @@
 #include <algorithm>
 #include <regex>
 #include <string>
-#include <iostream>
 
 TextParser::TextParser(Document document)
 {
-	this->pages = document.GetPages();
+	this->pages_ = document.get_pages();
 }
 
 TextParser::~TextParser()
 {
 }
 
-Concordance TextParser::CreateConcordance()
+Concordance TextParser::create_concordance()
 {
-	FillInWordsList();
-	return Concordance(this->words);
+	fill_in_words_list();
+	return Concordance(this->words_);
 }
 
-void TextParser::FillInWordsList()
+void TextParser::fill_in_words_list()
 {
 	std::regex reg("\\w+");
-	this->words = vector<Word>();
+	this->words_ = vector<Word>();
 
-	for (int i = 0; i < this->pages.size(); i++) {
+	for (int i = 0; i < this->pages_.size(); i++) {
 		//Creating collection of all words on pages
-		string pageText = JoinLines(pages.at(i));
+		string page_text = join_lines(pages_.at(i));
 
 		std::smatch match;
 
-		std::regex_iterator<string::iterator> it(pageText.begin(), pageText.end(), reg);
+		std::regex_iterator<string::iterator> it(page_text.begin(), page_text.end(), reg);
 		std::regex_iterator<string::iterator> end;
-
+		
 		for (; it != end; ++it)
 		{
-			vector<int> pageNumbers;
-			Word word = Word(it->str(), 1, this->pages[i].GetCurrentPageNumber(), vector<int>());
-			if (!IsWordsContainsWord(word)) {
-				this->words.push_back(word);
+			vector<int> page_numbers;
+			Word word = Word(it->str(), 1, this->pages_[i].get_current_page_number(), vector<int>());
+			if (!is_words_contains_word(word)) {
+				this->words_.push_back(word);
 			}
 		}
 	}
 }
 
-bool TextParser::IsWordsContainsWord(Word word)
+bool TextParser::is_words_contains_word(Word word)
 {
 	// & point to element without copying it into memory
-	for (auto &w : words) {
-		if (w.GetValue().compare(word.GetValue()) == 0) {
-			w.IncreaseRepeatCount();
-
-			vector<int> wordPageNumbers = w.GetPageNumbers();
+	for (auto &w : words_) {
+		if (w.get_value() == word.get_value()) {
+			w.increase_repeat_count();
+			
 			//Check if 'words[i]' already contains page number
+			for (auto &number : word.get_page_numbers())
+			{
+				auto iter = std::find(w.get_page_numbers().begin(), w.get_page_numbers().end(),
+					number);
 
-			for (int &wordPageNumber : wordPageNumbers) {
-				auto iter = std::find(wordPageNumbers.begin(), wordPageNumbers.end(), wordPageNumber);
-
-				if (iter == wordPageNumbers.end()) {
-					wordPageNumbers.push_back(wordPageNumber);
+				if (iter == w.get_page_numbers().end()) {
+					w.get_page_numbers().push_back(number);
 				}
 			}
 			return true;
@@ -68,10 +67,10 @@ bool TextParser::IsWordsContainsWord(Word word)
 	return false;
 }
 
-string TextParser::JoinLines(Page page)
+string TextParser::join_lines(Page page)
 {
 	string result;
-	vector<string> lines = page.GetLines();
+	vector<string> lines = page.get_lines();
 	for (string &line : lines) {
 		std::transform(line.begin(), line.end(), line.begin(), ::tolower);
 		result.append(line);

@@ -12,8 +12,8 @@ int main()
 	DocumentCreator creator = DocumentCreator("D:\\1.txt", 5);
 	try
 	{
-		Document document = creator.CreateDocumentModel();
-		Concordance concordance = TextParser(document).CreateConcordance();
+		Document document = creator.create_document_model();
+		Concordance concordance = TextParser(document).create_concordance();
 		concordance.WriteFile("D:\\3.txt");
 		std::cout << "Concordance have been created successfully" << std::endl;
 	}

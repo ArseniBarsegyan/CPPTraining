@@ -1,34 +1,34 @@
 #include "stdafx.h"
 #include "Word.h"
 
-Word::Word(string value, int repeatCount, int numberOfPage, vector<int> pageNumbers)
+Word::Word(string value, int repeat_count, int number_of_page, vector<int> page_numbers)
 {
-	this->value = value;
-	this->repeatCount = repeatCount;
-	this->pageNumbers = pageNumbers;
-	this->pageNumbers.push_back(numberOfPage);
+	this->value_ = value;
+	this->repeat_count_ = repeat_count;
+	this->page_numbers_ = page_numbers;
+	this->page_numbers_.push_back(number_of_page);
 }
 
 Word::~Word()
 {
 }
 
-void Word::IncreaseRepeatCount()
+void Word::increase_repeat_count()
 {
-	this->repeatCount++;
+	this->repeat_count_++;
 }
 
-string Word::GetValue()
+string Word::get_value()
 {
-	return this->value;
+	return this->value_;
 }
 
-int Word::GetRepeatCount()
+int Word::get_repeat_count()
 {
-	return this->repeatCount;
+	return this->repeat_count_;
 }
 
-vector<int> Word::GetPageNumbers()
+vector<int> Word::get_page_numbers()
 {
-	return this->pageNumbers;
+	return this->page_numbers_;
 }

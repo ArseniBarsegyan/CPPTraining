@@ -15,8 +15,8 @@ public:
 
 	void WriteFile(string path);
 private:
-	vector<Word> words;
-	vector<string> GroupByAlphaBet();
-	map<string, vector<Word>> CreateGroups(vector<Word> words);
+	vector<Word> words_;
+	vector<string> group_by_alpha_bet();
+	map<string, vector<Word>> create_groups(vector<Word> words);
 };
 

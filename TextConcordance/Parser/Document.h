@@ -11,10 +11,10 @@ public:
 	Document(string name, vector<Page> pages);
 	~Document();
 
-	string GetName();
-	vector<Page> GetPages();
+	string get_name();
+	vector<Page> get_pages();
 private:
-	string name;
-	vector<Page> pages;
+	string name_;
+	vector<Page> pages_;
 };
 

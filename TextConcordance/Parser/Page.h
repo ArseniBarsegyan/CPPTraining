@@ -8,16 +8,16 @@ class Page
 {
 public:
 	Page();
-	Page(int currentPageNumber, int numberOfLines, vector<string> lines);
+	Page(int current_page_number, int number_of_lines, vector<string> lines);
 	~Page();
 
-	void AddLine(string line);
-	int GetCurrentPageNumber();
-	int GetNumberOfLines();
-	vector<string> GetLines();
+	void add_line(string line);
+	int get_current_page_number();
+	int get_number_of_lines();
+	vector<string> get_lines();
 private:
-	int currentPageNumber;
-	int numberOfLines;
-	vector<string> lines;
+	int current_page_number_;
+	int number_of_lines_;
+	vector<string> lines_;
 };
 
