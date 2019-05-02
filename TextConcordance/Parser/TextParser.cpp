@@ -54,7 +54,7 @@ bool TextParser::is_words_contains_word(Word word)
 			//Check if 'words[i]' already contains page number
 			for (auto &number : word.get_page_numbers())
 			{
-				if (!contains(word.get_page_numbers(), number))
+				if (!contains(w.get_page_numbers(), number))
 				{
 					w.get_page_numbers().push_back(number);
 				}
