@@ -7,8 +7,11 @@
 
 int main()
 {
+	// Measure app running time
 	auto started = std::chrono::high_resolution_clock::now();
 
+	// Read document from drive (we count that document 1.txt exists on drive D and 
+	// every page contains 5 lines of text)
 	DocumentCreator creator = DocumentCreator("D:\\1.txt", 5);
 	try
 	{
@@ -22,6 +25,7 @@ int main()
 		std::cout << "Document doesn't exists. Please check your app settings" << std::endl;
 	}
 
+	// Measure app running time
 	auto done = std::chrono::high_resolution_clock::now();
 	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(done - started).count();
 	return 0;

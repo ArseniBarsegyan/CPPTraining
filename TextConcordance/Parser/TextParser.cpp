@@ -54,15 +54,27 @@ bool TextParser::is_words_contains_word(Word word)
 			//Check if 'words[i]' already contains page number
 			for (auto &number : word.get_page_numbers())
 			{
-				auto iter = std::find(w.get_page_numbers().begin(), w.get_page_numbers().end(),
-					number);
-
-				if (iter == w.get_page_numbers().end()) {
+				if (!contains(word.get_page_numbers(), number))
+				{
 					w.get_page_numbers().push_back(number);
 				}
 			}
 			return true;
 		}		
+	}
+	return false;
+}
+
+// simple linear search
+bool TextParser::contains(vector<int> numbers, int number)
+{
+	bool result;
+	for (int i = 0; i < numbers.size(); i++)
+	{
+		if (numbers.at(i) == number)
+		{
+			return true;
+		}
 	}
 	return false;
 }

@@ -7,7 +7,7 @@
 using std::vector;
 using std::string;
 
-//Creating a document model from text file
+// Create a document object model from text file
 class DocumentCreator
 {
 public:
@@ -23,6 +23,7 @@ private:
 
 	// Check if file exists
 	inline bool is_file_exists(const std::string& name);
+	// Read file content and create object models of pages from this file
 	void read_file_content();
 };
 

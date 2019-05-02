@@ -5,6 +5,7 @@
 using std::vector;
 using std::string;
 
+// Collection of pages
 class Document
 {
 public:

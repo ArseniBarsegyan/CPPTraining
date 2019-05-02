@@ -39,22 +39,25 @@ void DocumentCreator::read_file_content()
 	this->pages_ = vector<Page>();
 
 	string line;
-	int countLines = 1;
-	int pageNumber = 1;
-	this->page_ = Page(pageNumber, this->number_of_lines_per_page_, vector<string>());
+	int count_lines = 1;
+	int page_number = 1;
+	this->page_ = Page(page_number, this->number_of_lines_per_page_, vector<string>());
 
 	if (in.is_open()) {
 		while (getline(in, line)) {
-			// When all lines of page are filled adding filled page to list of pages
-			// Creating new page and start filling it again. Counting of lines starting again
-			if (countLines > this->number_of_lines_per_page_) {
+			// Start filling page.
+			// When all lines of page are filled, add filled page to list of pages.
+			// After that create new page and start filling it again. 
+			// Counting of lines starts
+			// from 1 again until new page will be filled.
+			if (count_lines > this->number_of_lines_per_page_) {
 				this->pages_.push_back(this->page_);
-				pageNumber++;
-				this->page_ = Page(pageNumber, this->number_of_lines_per_page_, vector<string>());
-				countLines = 1;
+				page_number++;
+				this->page_ = Page(page_number, this->number_of_lines_per_page_, vector<string>());
+				count_lines = 1;
 			}
 			this->page_.add_line(line);
-			countLines++;
+			count_lines++;
 		}
 	}
 	this->pages_.push_back(this->page_);
