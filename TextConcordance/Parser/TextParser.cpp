@@ -35,8 +35,8 @@ void TextParser::fill_in_words_list()
 		
 		for (; it != end; ++it)
 		{
-			vector<int> page_numbers;
-			Word word = Word(it->str(), 1, this->pages_[i].get_current_page_number(), vector<int>());
+			auto page_numbers = new vector<int>();
+			Word word = Word(it->str(), 1, this->pages_[i].get_current_page_number(), page_numbers);
 			if (!is_words_contains_word(word)) {
 				this->words_.push_back(word);
 			}
@@ -52,11 +52,11 @@ bool TextParser::is_words_contains_word(Word word)
 			w.increase_repeat_count();
 			
 			//Check if 'words[i]' already contains page number
-			for (auto &number : word.get_page_numbers())
+			for (auto &number : *word.get_page_numbers())
 			{
-				if (!contains(w.get_page_numbers(), number))
+				if (!contains(*w.get_page_numbers(), number))
 				{
-					w.get_page_numbers().push_back(number);
+					w.get_page_numbers()->push_back(number);
 				}
 			}
 			return true;

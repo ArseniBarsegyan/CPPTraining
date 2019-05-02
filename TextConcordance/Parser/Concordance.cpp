@@ -39,7 +39,7 @@ vector<string> Concordance::group_by_alpha_bet()
 				+ std::to_string(repeat_count)
 				+ ": ";
 
-			for (auto page_number : word.get_page_numbers()) {
+			for (auto page_number : *word.get_page_numbers()) {
 				word_info.append(" ");
 				word_info.append(std::to_string(page_number));
 			}
