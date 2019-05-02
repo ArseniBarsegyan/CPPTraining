@@ -5,6 +5,11 @@
 #include "TextParser.h"
 #include <chrono>
 
+// Task: create text concordance of the text file.
+// Concordance is a document where you can find list
+// of words (ordered alphabetically) 
+// that occurs in a document, their occurence count and
+// number of pages where these words occur.
 int main()
 {
 	// Measure app running time
