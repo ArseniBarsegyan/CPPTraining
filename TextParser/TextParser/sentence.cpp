@@ -57,8 +57,30 @@ std::vector<word*>* sentence::get_all_unique_words(int length)
 	return words;
 }
 
-void sentence::replace_all_words_by_length_with_substring(int word_length, std::vector<sentence_item*>* items)
+// TODO: check this method work
+void sentence::replace_all_words_by_length_with_substring(unsigned long word_length, std::vector<sentence_item*>* items)
 {
+	for (int i = 0; i < sentence_items_->size(); i++)
+	{
+		auto &item = sentence_items_->at(i);
+		const std::type_info& type_info = typeid(item);
+		if (type_info != typeid(word))
+		{
+			continue;
+		}
+		if (item->get_value()->size() != word_length)
+		{
+			continue;
+		}
+		delete &item;
+		auto current_position = i;
+		for (auto &subItem : *items)
+		{
+			auto iter = sentence_items_->begin();
+			sentence_items_->insert(iter + current_position, subItem);
+			current_position++;
+		}
+	}
 }
 
 void sentence::replace_all_sentence_words_start_with_consonant(int length)
