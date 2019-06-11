@@ -14,4 +14,5 @@ std::string* sentence_separator::get_value()
 sentence_separator::~sentence_separator()
 {
 	delete this->value_;
+	value_ = nullptr;
 }

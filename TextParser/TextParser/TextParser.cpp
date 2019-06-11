@@ -3,9 +3,13 @@
 #include "word.h"
 #include "word_separator.h"
 #include "sentence.h"
+#include <chrono>
 
 int main()
 {
+	// Measure app running time
+	auto started = std::chrono::high_resolution_clock::now();
+
 	// Managing these objects implemented in sentence class
 	sentence_item* wrd_separator = new word_separator(new std::string("@"));
 	sentence_item* wrd = new word(new std::string("test"));
@@ -23,8 +27,24 @@ int main()
 	replacement_string->push_back(replacement_word2);
 
 	sent->replace_all_words_by_length_with_substring(4, replacement_string);
+	delete replacement_string;
+	replacement_string = nullptr;
 
-	std::cout << *sent->get_sentence();
+	std::string* sentence_value = sent->get_sentence();
+	std::cout << *sentence_value;
+	std::cout << std::endl;
+	delete sentence_value;
+	sentence_value = nullptr;
+
+	sent->remove_all_sentence_words_start_with_consonant_by_length(4);
+	std::string* sentence_value_2 = sent->get_sentence();
+	std::cout << *sentence_value_2;
+	std::cout << std::endl;
+
 	delete sent;
 	sent = nullptr;
+
+	// Measure app running time
+	auto done = std::chrono::high_resolution_clock::now();
+	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(done - started).count();
 }

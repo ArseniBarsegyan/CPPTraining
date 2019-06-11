@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "sentence.h"
 #include <typeinfo>
+#include <regex>
 
 sentence::sentence(std::vector<sentence_item*>* sentence_items)
 {
@@ -87,12 +88,29 @@ void sentence::replace_all_words_by_length_with_substring(unsigned long word_len
 		}
 	}
 	// TODO: is it ok to manage object and it's pointer that came from outside inside this method?	
-	delete items;
-	items = nullptr;
 }
 
-void sentence::replace_all_sentence_words_start_with_consonant(int length)
+void sentence::remove_all_sentence_words_start_with_consonant_by_length(int length)
 {
+	for (auto& item : *sentence_items_)
+	{
+		if (item != nullptr)
+		{
+			auto item_value = item->get_value();
+
+			if (item_value->size() == length)
+			{
+				std::regex reg(R"(\b[b-d,f-h,j-n,p-t,v,w,x,z]\S+\b)");
+				std::smatch match;
+
+				if (std::regex_match(item_value->begin(), item_value->end(), reg))
+				{
+					delete item;
+					item = nullptr;
+				}
+			}
+		}		
+	}
 }
 
 std::string* sentence::get_sentence()

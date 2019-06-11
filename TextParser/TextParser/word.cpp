@@ -19,5 +19,6 @@ void word::add_symbol(char* c)
 word::~word()
 {
 	delete this->value_;
+	this->value_ = nullptr;
 }
 

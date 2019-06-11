@@ -14,4 +14,5 @@ std::string* word_separator::get_value()
 word_separator::~word_separator()
 {
 	delete this->value_;
+	value_ = nullptr;
 }
