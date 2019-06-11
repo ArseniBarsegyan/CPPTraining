@@ -8,6 +8,6 @@ private:
 	std::string* value_;
 public:
 	word_separator(std::string* value);
-	std::string* get_value() override;
+	std::string get_value() override;
 	~word_separator();
 };

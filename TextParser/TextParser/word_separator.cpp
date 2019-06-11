@@ -6,9 +6,9 @@ word_separator::word_separator(std::string* value)
 	this->value_ = value;
 }
 
-std::string* word_separator::get_value()
+std::string word_separator::get_value()
 {
-	return this->value_;
+	return *this->value_;
 }
 
 word_separator::~word_separator()

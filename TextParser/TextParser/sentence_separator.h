@@ -7,6 +7,6 @@ private:
 	std::string* value_;
 public:
 	sentence_separator(std::string* value);
-	std::string* get_value() override;
+	std::string get_value() override;
 	~sentence_separator();
 };

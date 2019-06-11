@@ -30,15 +30,13 @@ int main()
 	delete replacement_string;
 	replacement_string = nullptr;
 
-	std::string* sentence_value = sent->get_sentence();
-	std::cout << *sentence_value;
+	std::string sentence_value = sent->get_sentence();
+	std::cout << sentence_value;
 	std::cout << std::endl;
-	delete sentence_value;
-	sentence_value = nullptr;
 
 	sent->remove_all_sentence_words_start_with_consonant_by_length(4);
-	std::string* sentence_value_2 = sent->get_sentence();
-	std::cout << *sentence_value_2;
+	std::string sentence_value_2 = sent->get_sentence();
+	std::cout << sentence_value_2;
 	std::cout << std::endl;
 
 	delete sent;

@@ -6,9 +6,9 @@ word::word(std::string* value)
 	this->value_ = value;
 }
 
-std::string* word::get_value()
+std::string word::get_value()
 {
-	return this->value_;
+	return *this->value_;
 }
 
 void word::add_symbol(char* c)

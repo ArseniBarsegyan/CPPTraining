@@ -4,5 +4,5 @@
 class sentence_item
 {
 public:
-	virtual std::string* get_value() = 0;
+	virtual std::string get_value() = 0;
 };
