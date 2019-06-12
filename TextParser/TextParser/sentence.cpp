@@ -2,6 +2,7 @@
 #include "sentence.h"
 #include <typeinfo>
 #include <regex>
+#include <set>
 
 sentence::sentence(std::vector<sentence_item*>* sentence_items)
 {
@@ -44,6 +45,10 @@ bool sentence::is_interrogative_sentence()
 {
 	for (auto& item : *sentence_items_)
 	{
+		if (item == nullptr)
+		{
+			continue;
+		}
 		if (contains(item->get_value(), '?'))
 		{
 			return true;
@@ -52,31 +57,57 @@ bool sentence::is_interrogative_sentence()
 	return false;
 }
 
-std::vector<sentence_item*>* sentence::get_all_unique_words(int length)
+std::set<sentence_item*>* sentence::get_all_unique_words(int length)
 {
-	std::vector<sentence_item*>* words = new std::vector<sentence_item*>();
+	std::set<sentence_item*>* unique_words = new std::set<sentence_item*>();
 
 	for (auto i = 0; i < sentence_items_->size(); ++i)
 	{
-		auto& item = *sentence_items_->at(i);
-		const std::type_info& type_info = typeid(item);
+		auto& item = sentence_items_->at(i);
+
+		if (item == nullptr)
+		{
+			continue;
+		}
+		const std::type_info& type_info = typeid(*item);
 		if (type_info != typeid(word))
 		{
 			continue;
 		}
-		if (item.get_value().size() != length)
+		if (item->get_value().size() != length)
 		{
 			continue;
+		}		
+		auto group = unique_words->find(item);
+
+		if (group == unique_words->end()) {
+			unique_words->insert(item);
 		}
-		// TODO: push item
-		words->push_back(*item);
 	}
-	auto groups = create_groups(sentence_items_);
-	// TODO: loop at groups keys
+	return unique_words;
+}
+
+std::map<std::string, std::vector<sentence_item*>*>* sentence::create_groups(std::vector<sentence_item*>* sentence_items)
+{
+	auto groups = new std::map<std::string, std::vector<sentence_item*>*>();
+
+	for (sentence_item* item : *sentence_items) {
+		std::string sentence_group_key = item->get_value();
+		auto group = *groups->find(sentence_group_key);
+
+		if (group != *groups->end()) {
+			// put word in group's words.
+			groups->at(sentence_group_key)->push_back(item);
+		}
+		else {
+			// create new group, add words collection and insert word to this collection.
+			groups->insert(std::make_pair(sentence_group_key, new std::vector<sentence_item*>()));
+			groups->at(sentence_group_key)->push_back(item);
+		}
+	}
 	return groups;
 }
 
-// TODO: check this method work
 void sentence::replace_all_words_by_length_with_substring(unsigned long word_length, std::vector<sentence_item*>* items)
 {
 	for (auto i = 0; i < sentence_items_->size(); ++i)
@@ -141,27 +172,6 @@ std::string sentence::get_sentence()
 		}		
 	}
 	return result;
-}
-
-std::map<std::string, std::vector<sentence_item*>*>* sentence::create_groups(std::vector<sentence_item*>* sentence_items)
-{
-	auto groups = new std::map<std::string, std::vector<sentence_item*>*>();
-
-	for (sentence_item* wrd : *sentence_items) {
-		std::string word_group_key = wrd->get_value();
-		auto group = *groups->find(word_group_key);
-
-		if (group != *groups->end()) {
-			// put word in group's words.
-			groups->at(word_group_key)->push_back(wrd);
-		}
-		else {
-			// create new group, add words collection and insert word to this collection.
-			groups->insert(std::make_pair(word_group_key, new std::vector<sentence_item*>()));
-			groups->at(word_group_key)->push_back(wrd);
-		}
-	}
-	return groups;
 }
 
 sentence::~sentence()

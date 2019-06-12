@@ -13,9 +13,11 @@ int main()
 	// Managing these objects implemented in sentence class
 	sentence_item* wrd_separator = new word_separator(new std::string("@"));
 	sentence_item* wrd = new word(new std::string("test"));
+	sentence_item* end_of_sentence = new word_separator(new std::string("?"));
 	auto sentence_items = new std::vector<sentence_item*>();
 	sentence_items->push_back(wrd);
 	sentence_items->push_back(wrd_separator);
+	sentence_items->push_back(end_of_sentence);
 	auto sent = new sentence(sentence_items);
 
 	sentence_item* replacement_word = new word(new std::string("replacement"));
@@ -32,13 +34,19 @@ int main()
 
 	std::string sentence_value = sent->get_sentence();
 	std::cout << sentence_value;
+	std::cout << std::endl;	
+	std::cout << sent->is_interrogative_sentence();
 	std::cout << std::endl;
+
+	auto unique_words = sent->get_all_unique_words(4);
+	delete unique_words;
+	unique_words = nullptr;
 
 	sent->remove_all_sentence_words_start_with_consonant_by_length(4);
 	std::string sentence_value_2 = sent->get_sentence();
 	std::cout << sentence_value_2;
 	std::cout << std::endl;
-
+	
 	delete sent;
 	sent = nullptr;
 
