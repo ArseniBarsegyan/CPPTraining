@@ -12,7 +12,7 @@ void terminal::receive_call()
 	std::cout << "accept call?";
 }
 
-void terminal::make_call(int number)
+std::string terminal::make_call(int number)
 {
-	this->station_->make_call(this->port_, number);
+	return this->station_->make_call(this->port_, number);
 }

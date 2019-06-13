@@ -9,5 +9,6 @@ public:
 	port(int number);
 	std::string status;
 	int get_number();
+	void establish_connection();
 	~port();
 };

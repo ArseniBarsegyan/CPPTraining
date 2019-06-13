@@ -11,6 +11,11 @@ int port::get_number()
 	return this->number_;
 }
 
+void port::establish_connection()
+{
+	this->status = "busy";
+}
+
 port::~port()
 {
 }

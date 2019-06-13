@@ -25,30 +25,38 @@ port* station::create_new_port()
 {
 	int number = 11111111 + rand() % (99999999 - 11111111);
 	port* prt = new port(number);
+	this->closed_ports_->push_back(prt);
 	return prt;
 }
 
-void station::make_call(port* from_port, int to_port_number)
+std::string station::make_call(port* from_port, int to_port_number)
 {
 	port* target_port = get_port_by_number(this->opened_ports_, to_port_number);
 	if (target_port != nullptr)
 	{
-		// TODO: establish call
-		return;
+		target_port->establish_connection();
+		// TODO - move port to busy list
+		// fire event - port state changed. subscriber - terminal
+		// when terminal will receive this event - it will ask user about confirmation
+		// user reject call - send message to station. Station will notify 1st terminal that user is busy
+		// and will move 2nd port to active status again.
+		// if user accept call - set both ports to busy state, start writing time and send messages to both of users
+		// after one of them end call - create new call object and save it.
+		// company have access to calls list of the station.
+		
+		return "establishing call";
 	}
 	target_port = get_port_by_number(this->closed_ports_, to_port_number);
 	if (target_port != nullptr)
 	{
-		// TODO: return answer: user is inactive
-		return;
+		return "user is offline";
 	}
 	target_port = get_port_by_number(this->busy_ports_, to_port_number);
 	if (target_port != nullptr)
 	{
-		// TODO: return answer: user is busy
-		return;
+		return "user is busy";
 	}
-	// TODO: user not exists
+	return "user doesn't exists";
 }
 
 station::~station()

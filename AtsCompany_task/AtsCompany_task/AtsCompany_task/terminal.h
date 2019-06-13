@@ -14,10 +14,13 @@ public:
 	rate* get_current_rate();
 	void change_rate(rate* new_rate);
 	void receive_call();
-	void make_call(int number);
+	std::string make_call(int number);
 	void reject_call();
 	void accept_call();
+	void end_call();
 	int get_balance();
 	void add_money();
 	~terminal();
+	//TODO: turn off terminal - make port status inactive
+	// stop_contract() - remove terminal and its port from lists.
 };

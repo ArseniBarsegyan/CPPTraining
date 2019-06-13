@@ -13,6 +13,6 @@ private:
 public:
 	station();
 	port* create_new_port();
-	void make_call(port* from_port, int to_port_number);
+	std::string make_call(port* from_port, int to_port_number);
 	~station();
 };
