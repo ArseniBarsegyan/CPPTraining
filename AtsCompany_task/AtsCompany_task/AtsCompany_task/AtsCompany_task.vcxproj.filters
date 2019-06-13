@@ -15,48 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="port.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="call.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="terminal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="station.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="company.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="company_subscriber.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ATSCompany.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="port.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rate.cpp">
+    <ClCompile Include="AtsCompany_task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="call.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="terminal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="station.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="company.cpp">
@@ -65,8 +27,40 @@
     <ClCompile Include="company_subscriber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="port.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="station.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terminal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="call.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="company.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="company_subscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="station.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terminal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
